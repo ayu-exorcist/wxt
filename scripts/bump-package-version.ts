@@ -63,7 +63,11 @@ if (originalBumpType === 'major') {
 }
 const { releases: prevReleases } = await fs
   .readFile(changelogPath, 'utf8')
-  .then(parseChangelogMarkdown)
+  .then((contents) =>
+    parseChangelogMarkdown(
+      Buffer.isBuffer(contents) ? contents.toString('utf-8') : contents,
+    ),
+  )
   .catch(() => ({ releases: [] }));
 const allReleases = [
   {

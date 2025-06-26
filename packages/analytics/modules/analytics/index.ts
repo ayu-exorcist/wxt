@@ -39,11 +39,10 @@ export default defineWxtModule({
 
     // Generate #analytics module
     const wxtAnalyticsCode = [
-      `import { createAnalytics } from '${
-        import.meta.env.NPM
-          ? clientModuleId
-          : relative(wxtAnalyticsFolder, clientModuleId)
-      }';`,
+      `import { createAnalytics } from '${(import.meta.env.NPM
+        ? clientModuleId
+        : relative(wxtAnalyticsFolder, clientModuleId)
+      ).replaceAll('\\', '/')}';`,
       `import { useAppConfig } from '#imports';`,
       ``,
       `export const analytics = createAnalytics(useAppConfig().analytics);`,

@@ -20,7 +20,11 @@ consola.info('Creating release for:', { pkg, pkgName, prevTag });
 
 const { releases } = await fs
   .readFile(changelogPath, 'utf8')
-  .then(parseChangelogMarkdown)
+  .then((contents) =>
+    parseChangelogMarkdown(
+      Buffer.isBuffer(contents) ? contents.toString('utf-8') : contents,
+    ),
+  )
   .catch(() => ({ releases: [] }));
 
 const config = await loadChangelogConfig(process.cwd());

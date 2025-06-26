@@ -8,3 +8,5 @@ onlyBuiltDependencies:
   - sharp
   - simple-git-hooks
   - spawn-sync
+overrides:
+  'vite': '^7.0.0'
